@@ -29,6 +29,8 @@ const main = async () => {
       bot.sendMessage(message, DISCORD_CHANNEL_NAME)
     }
   })
+
+  bot.setStatus(`Wait for emails <${MAIL_USERNAME}>`, 'LISTENING')
 }
 
 main()

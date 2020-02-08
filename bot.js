@@ -24,6 +24,10 @@ class Bot {
       console.log(`Warning: Given channel name (${channelName}) does not exist!`)
     }
   }
+
+  setStatus(status, type = 'PLAYING') {
+    this.client.user.setActivity(status, { type })
+  }
 }
 
 export default Bot
