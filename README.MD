@@ -2,6 +2,11 @@
 This bot fetches new mails from your inbox and sends them as a message to your discord channel
 
 ## Start
+Install dependencies
+```
+$ npm i
+```
+
 You need to copy and rename `example.env` to `.env`, next you need to fill your email credentials, discord bot token and name of text channel you want to display mails
 ```
 MAIL_USERNAME=YOUR_EMAIL
