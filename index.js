@@ -30,7 +30,7 @@ const main = async () => {
     }
   })
 
-  bot.setStatus(`Wait for emails <${MAIL_USERNAME}>`, 'LISTENING')
+  bot.setStatus(`Waiting for emails <${MAIL_USERNAME}>`, 'LISTENING')
 }
 
 main()
