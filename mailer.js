@@ -38,6 +38,10 @@ class Mailer {
     console.log(`MailListener started to listen on <${username}>`);
   }
 
+  destroy() {
+    this.listener.stop()
+  }
+
   dateAfterStartup(date = new Date()) {
     return date - this.lastFetchDate >= 0
   }

@@ -31,6 +31,19 @@ const main = async () => {
   })
 
   bot.setStatus(`Waiting for emails <${MAIL_USERNAME}>`, 'LISTENING')
+
+  const cleanup = async () => {
+    process.stdin.resume()
+
+    await bot.destroy()
+    mailer.destroy()
+
+    process.exit(99)
+  }
+
+  process.on('SIGINT', cleanup)
+  process.on('SIGUSR1', cleanup)
+  process.on('SIGUSR2', cleanup)
 }
 
 main()

@@ -16,6 +16,11 @@ class Bot {
     })
   }
 
+  async destroy() {
+    await this.setStatus('Shutted down')
+    await this.client.destroy()
+  }
+
   sendMessage(msg, channelName) {
     const channel = this.client.channels.find(({name}) => name === channelName)
     if(channel) {
@@ -25,8 +30,8 @@ class Bot {
     }
   }
 
-  setStatus(status, type = 'PLAYING') {
-    this.client.user.setActivity(status, { type })
+  async setStatus(status, type = 'PLAYING') {
+    await this.client.user.setActivity(status, { type })
   }
 }
 
