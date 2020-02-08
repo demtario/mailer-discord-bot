@@ -35,6 +35,7 @@ class Mailer {
     });
 
     this.listener.start()
+    console.log(`MailListener started to listen on <${username}>`);
   }
 
   dateAfterStartup(date = new Date()) {

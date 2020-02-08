@@ -9,7 +9,8 @@ const {
   MAIL_USERNAME,
   MAIL_PASSWORD,
   MAIL_HOST,
-  DISCORD_TOKEN
+  DISCORD_TOKEN,
+  DISCORD_CHANNEL_NAME
 } = process.env
 
 const main = async () => {
@@ -25,7 +26,7 @@ const main = async () => {
   mailer.subscribe((mail) => {
     if(isInCC(mail.cc)) {
       const message = mapMapToEmbed(mail)
-      bot.sendMessage(message, 'test')
+      bot.sendMessage(message, DISCORD_CHANNEL_NAME)
     }
   })
 }

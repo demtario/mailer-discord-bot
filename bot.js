@@ -10,7 +10,7 @@ class Bot {
       this.client.login(token);
 
       this.client.on('ready', () => {
-        console.log(`Logged in as ${this.client.user.tag}!`);
+        console.log(`DiscordBot logged in as ${this.client.user.tag}!`);
         resolve()
       });
     })
@@ -18,7 +18,11 @@ class Bot {
 
   sendMessage(msg, channelName) {
     const channel = this.client.channels.find(({name}) => name === channelName)
-    channel.send(msg)
+    if(channel) {
+      channel.send(msg)
+    } else {
+      console.log(`Warning: Given channel name (${channelName}) does not exist!`)
+    }
   }
 }
 
