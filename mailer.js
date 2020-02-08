@@ -2,7 +2,9 @@ import MailListener from 'mail-listener2'
 
 class Mailer {
   constructor({ username, password, host }) {
+    this.lastFetchDate = new Date()
     this.subscribers = []
+
     this.listener = new MailListener({
       username,
       password,
@@ -21,13 +23,22 @@ class Mailer {
     });
 
     this.listener.on("mail", (mail, seqno, attributes) => {
-      console.log("emailParsed", mail);
+      if(!this.dateAfterStartup(mail.date)) {
+        return
+      }
+
       this.subscribers.forEach((cb) => {
         cb(mail, seqno, attributes)
       })
+
+      this.lastFetchDate = new Date()
     });
 
     this.listener.start()
+  }
+
+  dateAfterStartup(date = new Date()) {
+    return date - this.lastFetchDate >= 0
   }
 
   subscribe(cb) {

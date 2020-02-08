@@ -1,7 +1,7 @@
 import Bot from './bot'
 import Mailer from './mailer'
 
-import { mapMapToEmbed } from './utils'
+import { mapMapToEmbed, isInCC } from './utils'
 
 require('dotenv').config()
 
@@ -23,14 +23,11 @@ const main = async () => {
   await bot.login(DISCORD_TOKEN)
 
   mailer.subscribe((mail) => {
-    if(mail.cc && mail.cc.find(({address}) => address === MAIL_USERNAME)) {
+    if(isInCC(mail.cc)) {
       const message = mapMapToEmbed(mail)
-
       bot.sendMessage(message, 'test')
     }
   })
-
-  bot.sendMessage('Siema', 'test')
 }
 
 main()
