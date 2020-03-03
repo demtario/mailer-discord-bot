@@ -1,7 +1,7 @@
 import MailListener from 'mail-listener2'
 
 class Mailer {
-  constructor({ username, password, host }) {
+  constructor({ username, password, host, email }) {
     this.lastFetchDate = new Date()
     this.subscribers = []
 
@@ -12,18 +12,18 @@ class Mailer {
       port: 993,
       tls: true,
       tlsOptions: { rejectUnauthorized: false },
-      mailbox: "INBOX",
-      mailParserOptions: {streamAttachments: true},
+      mailbox: 'INBOX',
+      mailParserOptions: { streamAttachments: true },
       attachments: true,
-      attachmentOptions: { directory: "attachments/" }
+      attachmentOptions: { directory: 'attachments/' }
     })
 
-    this.listener.on("error", (err) => {
-      console.log(err);
-    });
+    this.listener.on('error', (err) => {
+      console.log(err)
+    })
 
-    this.listener.on("mail", (mail, seqno, attributes) => {
-      if(!this.dateAfterStartup(mail.date)) {
+    this.listener.on('mail', (mail, seqno, attributes) => {
+      if (!this.dateAfterStartup(mail.date)) {
         return
       }
 
@@ -32,10 +32,10 @@ class Mailer {
       })
 
       this.lastFetchDate = new Date()
-    });
+    })
 
     this.listener.start()
-    console.log(`MailListener started to listen on <${username}>`);
+    console.log(`MailListener started to listen on <${email}>`)
   }
 
   destroy() {
